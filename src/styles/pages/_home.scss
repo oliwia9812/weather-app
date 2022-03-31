@@ -1,0 +1,231 @@
+@use '../util'as *;
+
+.weather {
+
+     // Main Section
+    &__main {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        background-position: top left;
+        background-size: cover;
+        transition: height .5s ease-in-out;
+    }
+
+    &__main.active {
+        height: 60%;
+    }
+
+    &__wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 90%;
+        width: 90%;
+    }
+
+    &__search {
+        position: absolute;
+        right: 0;
+    }
+
+    &__search-icon {
+        height: rem(21);
+        width: rem(21);
+        margin-left: rem(16);
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__search-input {
+        background-color: transparent;
+        border: none;
+        width: 0;
+        border-bottom: rem(1) solid var(--primary-color-light);
+        line-height: 1.6;
+        font-size: rem(16);
+        visibility: hidden;
+        opacity: 0;
+        transition: all .5s ease-in-out;
+
+        &:focus {
+            outline: none;
+            color: var(--primary-color-light);
+        }
+
+        &::placeholder {
+            font-family: inherit;
+            font-size: rem(16);
+            color: #4f7380;
+            padding-left: rem(4);
+        }
+    }
+
+    &__search-input.active {
+        width: 50vw;
+        visibility: visible;
+        opacity: 1;
+
+        @include breakpoint-up(medium) {
+            width: 30vw;
+        }
+
+        @include breakpoint-up(large) {
+            width: 20vw;
+        }
+    }
+
+    &__container {
+        position: absolute;
+        bottom: 0;
+        color: var(--primary-color-light);
+        margin-bottom: 12vh;
+    }
+
+    &__weather-icon {
+        height: rem(120);
+        width: rem(120);
+        margin-bottom: rem(36);
+    }
+
+    &__temperature {
+        font-size: rem(90);
+        font-weight: 600;
+        letter-spacing: rem(-3);
+    }
+
+    &__button {
+        box-shadow: rgba(0, 0, 0, 0.40) 0px 5px 10px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-color: var(--primary-color-light);
+        border: 0;
+        border-radius: rem(30);
+        transition: all .2s cubic-bezier(0.19, 1, 0.22, 1);
+        width: 6.5rem;
+        padding: .5rem .5rem .5rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: transform .3s ease-in-out;
+
+        &-text {
+            display: block;
+            text-transform: uppercase;
+            font-weight: 500;
+            font-family: 'Jost', sans-serif;
+            letter-spacing: rem(2);
+            color: var(--secondary-color-dark);
+        }
+
+        &:hover {
+            cursor: pointer;
+            transform: translateY(rem(-5));
+        }
+
+        &-circle {
+            position: relative;
+            height: 1.6rem;
+            width: 1.6rem;
+            background-color: var(--secondary-color-dark);
+            border-radius: 30px;
+            z-index: 100;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(45deg);
+                border: solid var(--primary-color-light);
+                border-width: 0 rem(2) rem(2) 0;
+                display: inline-block;
+                padding: rem(2.5);
+            }
+        }
+
+        &-circle.active {
+            &::after {
+                transform: translate(-45%, -45%) rotate(-135deg);
+            }
+        }
+    }
+
+    &::after {
+        content: '';
+        z-index: -10;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        background-color: var(--overlay-color);
+    }
+
+    // More Section
+
+    &__more {
+        width: 90%;
+        height: auto;
+        margin: 0 auto;
+        padding: 3rem 0;
+    }
+
+    &__heading {
+        
+    }
+
+    &__today-highlights {
+
+    }
+
+    &____detail-list {
+
+    }
+   
+    &__detail-label {
+
+    }
+
+    &__detail-data {
+
+    }
+
+    &__next-days {
+
+    }
+
+    &__next-days-list {
+
+    }
+
+    &__day-details {
+
+    }
+
+    &__day-date {
+
+    }
+
+    &__day-temp {
+
+        &--day {
+
+        }
+
+        &--night {
+            
+        }
+    }
+
+    &__icon {
+
+    }
+}

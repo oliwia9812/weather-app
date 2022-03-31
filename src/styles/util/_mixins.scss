@@ -1,0 +1,21 @@
+@mixin flex($direction, $justify, $align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin background-img($url, $position) {
+    background-image: $url;
+    background-position: $position;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@mixin position-absolute {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/styles/main.scss">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+
+<body>
+     <!-- MAIN SECTION -->
+    <section class="weather__main">
+        <div class="weather__wrapper">
+            <div class="weather__search">
+                <input placeholder="Search location" type="text" class="weather__search-input" name="location"
+                    id="location">
+                <img class="icon weather__search-icon">
+            </div>
+            <div class="weather__container">
+                <img class="icon weather__weather-icon">
+                <p class="weather__greeting">Good morning. It's currently</p>
+                <p class="weather__temperature">15&#8451;</p>
+                <p class="weather__location">In London, Uk</p>
+            </div>
+            <button type="button" class="weather__button">
+                <span class="weather__button-text">more</span>
+                <div class="weather__button-circle"></div>
+            </button>
+        </div>
+    </section>
+
+     <!-- MORE SECTION -->
+    <section class="weather__more">
+
+        <!-- TODAY'S HIGHLIGHTS -->
+        <div class="weather__today-highlights">
+            <h2 class="weather__heading">Today&#39;s highlights</h2>
+            <div class="weather__detail-list">
+                <p class="weather__detail-label">pressure</p>
+                <p class="weather__detail-data">800 mb</p>
+            </div>
+            <div class="weather__detail-list">
+                <p class="weather__detail-label">humadity</p>
+                <p class="weather__detail-data">87%</p>
+            </div>
+            <div class="weather__detail-list">
+                <p class="weather__detail-label">visibility</p>
+                <p class="weather__detail-data">4 km</p>
+            </div>
+            <div class="weather__detail-list">
+                <p class="weather__detail-label">wind</p>
+                <p class="weather__detail-data">10 km/h</p>
+            </div>
+        </div>
+
+        <!-- NEXT 7 DAYS -->
+        <div class="weather__next-days">
+            <h2 class="weather__heading">Next days</h2>
+            <ul class="weather__next-days-list">
+                <li class="weather__day-details">
+                    <p class="weather__day-date">wind</p>
+                    <p class="weather__day-temp">
+                        <span class="weather__day-temp--day">15&#8451;</span>
+                        <span class="weather__day-temp--night">10&#8451;</span>
+                    </p>
+                    <img class="weather__day-icon">
+                </li>
+                <li class="weather__day-details">
+                    <p class="weather__date">wind</p>
+                    <p class="weather__temp">
+                        <span class="weather__temp--day">15&#8451;</span>
+                        <span class="weather__temp--night">10&#8451;</span>
+                    </p>
+                    <img class="weather__day-icon">
+                </li>
+                <li class="weather__day-details">
+                    <p class="weather__date">wind</p>
+                    <p class="weather__temp">
+                        <span class="weather__temp--day">15&#8451;</span>
+                        <span class="weather__temp--night">10&#8451;</span>
+                    </p>
+                    <img class="weather__day-icon">
+                </li>
+                <li class="weather__day-details">
+                    <p class="weather__date">wind</p>
+                    <p class="weather__temp">
+                        <span class="weather__temp--day">15&#8451;</span>
+                        <span class="weather__temp--night">10&#8451;</span>
+                    </p>
+                    <img class="weather__day-icon">
+                </li>
+                <li class="weather__day-details">
+                    <p class="weather__date">wind</p>
+                    <p class="weather__temp">
+                        <span class="weather__temp--day">15&#8451;</span>
+                        <span class="weather__temp--night">10&#8451;</span>
+                    </p>
+                    <img class="weather__day-icon">
+                </li>
+                <li class="weather__day-details">
+                    <p class="weather__date">wind</p>
+                    <p class="weather__temp">
+                        <span class="weather__temp--day">15&#8451;</span>
+                        <span class="weather__temp--night">10&#8451;</span>
+                    </p>
+                    <img class="weather__day-icon">
+                </li>
+                <li class="weather__day-details">
+                    <p class="weather__date">wind</p>
+                    <p class="weather__temp">
+                        <span class="weather__temp--day">15&#8451;</span>
+                        <span class="weather__temp--night">10&#8451;</span>
+                    </p>
+                    <img class="weather__day-icon">
+                </li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html>
