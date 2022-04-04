@@ -2,18 +2,23 @@
 
 .weather {
 
-     // Main Section
+    // Main Section
     &__main {
         position: relative;
-        height: 100%;
+        height: 100vh;
         width: 100%;
         background-position: top left;
         background-size: cover;
         transition: height .5s ease-in-out;
+        z-index: 10;
     }
 
     &__main.active {
-        height: 60%;
+        height: 40vh;
+
+        @include breakpoint-up(large) {
+            height: 70vh;
+        }
     }
 
     &__wrapper {
@@ -23,6 +28,7 @@
         transform: translate(-50%, -50%);
         height: 90%;
         width: 90%;
+
     }
 
     &__search {
@@ -44,12 +50,14 @@
         background-color: transparent;
         border: none;
         width: 0;
+        border-radius: 0;
         border-bottom: rem(1) solid var(--primary-color-light);
         line-height: 1.6;
         font-size: rem(16);
         visibility: hidden;
         opacity: 0;
         transition: all .5s ease-in-out;
+        color: var(--primary-color-light);
 
         &:focus {
             outline: none;
@@ -82,19 +90,53 @@
         position: absolute;
         bottom: 0;
         color: var(--primary-color-light);
-        margin-bottom: 12vh;
+        margin-bottom: 3rem;
+
+        @include breakpoint-up(large) {
+            margin-bottom: 10vh;
+        }
     }
 
     &__weather-icon {
-        height: rem(120);
-        width: rem(120);
-        margin-bottom: rem(36);
+        height: rem(70);
+        width: rem(70);
+        margin-bottom: rem(24);
+        opacity: 1;
+
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+        transition: opacity .3s ease-in-out;
+
+        @include breakpoint-down(medium) {
+            &.is-hidden {
+                opacity: 0;
+
+            }
+        }
+
+        @include breakpoint-up(medium) {
+            height: rem(100);
+            width: rem(100);
+        }
+
+        @include breakpoint-up(large) {
+            height: rem(120);
+            width: rem(120);
+            margin-bottom: rem(36);
+        }
     }
 
     &__temperature {
-        font-size: rem(90);
+        font-size: rem(60);
         font-weight: 600;
         letter-spacing: rem(-3);
+
+        @include breakpoint-up(medium) {
+            font-size: rem(80);
+        }
+
+        @include breakpoint-up(large) {
+            font-size: rem(90);
+        }
     }
 
     &__button {
@@ -106,12 +148,20 @@
         border: 0;
         border-radius: rem(30);
         transition: all .2s cubic-bezier(0.19, 1, 0.22, 1);
-        width: 6.5rem;
-        padding: .5rem .5rem .5rem 1rem;
+        width: 6.2rem;
+        padding: rem(6) rem(6) rem(6) rem(16);
         display: flex;
         justify-content: space-between;
         align-items: center;
         transition: transform .3s ease-in-out;
+
+        @include breakpoint-up(medium) {}
+
+        @include breakpoint-up(large) {
+            padding: .5rem .5rem .5rem 1rem;
+            width: 6.5rem;
+        }
+
 
         &-text {
             display: block;
@@ -170,62 +220,191 @@
     }
 
     // More Section
-
     &__more {
+        flex-direction: column;
+        justify-content: space-evenly;
         width: 90%;
-        height: auto;
+        height: 100%;
         margin: 0 auto;
         padding: 3rem 0;
+        color: var(--secondary-color-dark);
+        display: none;
+
+        @include breakpoint-up(large) {
+            flex-direction: row;
+            justify-content: space-between;
+            font-size: rem(16);
+            padding: 3rem 0;
+        }
+
+        &.active {
+            display: flex;
+        }
+
+        @include breakpoint-up(xlarge) {
+            justify-content: unset;
+        }
     }
 
     &__heading {
-        
+        margin-bottom: rem(16);
+        font-size: rem(18);
+
+        @include breakpoint-up(large) {
+            margin-bottom: rem(36);
+        }
+
     }
 
     &__today-highlights {
 
+        @include breakpoint-up(large) {
+            width: 30%;
+            margin-right: 5%;
+        }
+
+        @include breakpoint-up(xlarge) {
+            margin-right: 10%;
+        }
+
     }
 
-    &____detail-list {
+    &__detail-list {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: rem(36);
 
+        @include breakpoint-up(medium) {
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            text-align: center;
+            margin-bottom: rem(36);
+        }
+
+        @include breakpoint-up(large) {
+            flex-wrap: wrap;
+            justify-content: space-between;
+            text-align: left;
+        }
     }
-   
+
+    &__detail-item {
+        padding-right: rem(16);
+        padding-bottom: rem(16);
+
+        @include breakpoint-up(large) {
+            padding-bottom: rem(36);
+            width: 50%;
+        }
+    }
+
     &__detail-label {
+        font-weight: 400;
+        font-size: rem(10);
 
+        &>*:not(:last-child) {
+            margin-bottom: rem(16);
+        }
+
+        @include breakpoint-up(xlarge) {
+            font-size: rem(14);
+        }
     }
 
     &__detail-data {
+        font-weight: 700;
+        font-size: rem(12);
 
+        @include breakpoint-up(xlarge) {
+            font-size: rem(18);
+        }
     }
 
     &__next-days {
-
+        width: 100%;
     }
 
     &__next-days-list {
 
+        @include breakpoint-up(large) {
+            display: flex;
+            flex-wrap: wrap;
+        }
     }
 
     &__day-details {
+        position: relative;
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+        border-radius: rem(12);
+        padding: rem(16) rem(20);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
+        &:not(:last-of-type) {
+            margin-bottom: rem(16);
+        }
+
+        @include breakpoint-up(large) {
+            flex-direction: column;
+            padding: rem(12) rem(16);
+            flex: 1;
+            margin-bottom: rem(16);
+
+            &:not(:last-of-type) {
+                margin-right: rem(16);
+            }
+
+            &>*:not(:last-child) {
+                margin-bottom: rem(16);
+            }
+        }
+
+        @include breakpoint-up(large) {
+            padding: rem(16) rem(18);
+
+            &>*:not(:last-child) {
+                margin-bottom: rem(24);
+            }
+        }
     }
 
     &__day-date {
+        font-size: rem(12);
 
+        @include breakpoint-up(large) {
+            font-size: rem(10);
+        }
+
+        @include breakpoint-up(xlarge) {
+            font-size: rem(14);
+        }
     }
 
     &__day-temp {
+        font-size: rem(12);
 
-        &--day {
+        @include breakpoint-up(large) {
+            font-size: rem(10);
+        }
 
+        @include breakpoint-up(xlarge) {
+            font-size: rem(14);
         }
 
         &--night {
-            
+            color: var(--gray);
         }
     }
 
-    &__icon {
+    &__day-icon {
+        height: rem(16);
+        width: rem(16);
+        filter: invert(14%) sepia(23%) saturate(3%) hue-rotate(314deg) brightness(100%) contrast(85%);
 
+        @include breakpoint-up(large) {
+            height: rem(36);
+            width: rem(36);
+        }
     }
 }
