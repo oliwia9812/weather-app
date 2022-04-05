@@ -7,7 +7,9 @@ import heavyRain from './assets/heavyRain.svg';
 import thunderstorm from './assets/thunderstorm.svg';
 import background from './assets/background.jpg';
 import search from './assets/search.svg';
-import 'regenerator-runtime/runtime';
+
+
+
 
 
 //Add images
@@ -29,7 +31,7 @@ window.addEventListener('click', (e) => {
     } else if (e.target !== searchInput) {
         searchInput.classList.remove('active');
     }
-    
+
     searchInput.classList.contains('active') ? searchInput.value : searchInput.value = '';
 });
 
@@ -61,7 +63,7 @@ function showMore() {
 function showLess() {
     weatherIcon.classList.remove('is-hidden');
     arrow.classList.remove('active');
-    textButton.innerHTML = 'more';  
+    textButton.innerHTML = 'more';
     mainSection.classList.remove('active');
     setTimeout(() => {
         moreSection.classList.remove('active');
@@ -70,9 +72,73 @@ function showLess() {
 }
 
 
-  //Add weather icons 
+//Add weather icons 
 const nextDaysIcons = document.querySelectorAll('.weather__day-icon');
 
 nextDaysIcons.forEach(day => {
     day.setAttribute('src', sun);
 });
+
+//Greeting
+let currentTime = new Date().getHours();
+let greetingMsg;
+
+if (currentTime > 5 && currentTime < 12) {
+    greetingMsg = 'Good morning'
+} else if (currentTime > 12 && currentTime < 18) {
+    greetingMsg = 'Good afternoon'
+} else {
+    greetingMsg = 'Good evening'
+}
+
+document.querySelector('.weather__greeting').innerHTML = greetingMsg + ". " + "it's currently";
+
+
+//Weather API 
+const location = document.querySelector('.weather__location');
+const currentTemp = document.querySelector('.weather__temperature');
+
+
+function initPosition() {
+    let lat;
+    let lon;
+
+    let checkPosition = new Promise(resolve => {
+        window.addEventListener('load', () => {
+            navigator.geolocation.getCurrentPosition(showCurrentLocation);
+
+            function showCurrentLocation(position) {
+                lat = position.coords.latitude,
+                    lon = position.coords.longitude
+                resolve({
+                    lat: lat,
+                    lon: lon
+                })
+            }
+        })
+    })
+    return checkPosition
+}
+
+function getWeatherDataFromCurrentPosition(lat, lon) {
+    let api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.API_KEY}&units=metric`;
+    fetch(api)
+        .then(response => response.json())
+        .then(data => {
+            location.innerHTML = 'in ' + data.name + ', ' + data.sys.country;
+            currentTemp.innerHTML = Math.round(data.main.temp) + '&#8451;';
+        });
+}
+
+function getDefaultWeatherData() {
+    const api = `https://api.openweathermap.org/data/2.5/weather?q=Warsaw&appid=${process.env.API_KEY}&units=metric`;
+    fetch(api)
+        .then(response => response.json())
+        .then(data => {
+            currentTemp.innerHTML = Math.round(data.main.temp) + '&#8451;';
+        });
+}
+
+initPosition()
+    .then(response => getWeatherDataFromCurrentPosition(response.lat, response.lon))
+    .catch(getDefaultWeatherData())

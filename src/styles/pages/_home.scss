@@ -67,9 +67,14 @@
         &::placeholder {
             font-family: inherit;
             font-size: rem(16);
-            color: #4f7380;
+            color: #87a4af;
             padding-left: rem(4);
+            @include breakpoint-up(medium) {
+                color: #4f7380;
+            }
         }
+
+       
     }
 
     &__search-input.active {

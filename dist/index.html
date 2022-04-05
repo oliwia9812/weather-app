@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../src/styles/main.scss">
     <title>Webpack App</title>
-<script defer src="main9b1204e10b223789adc5.js"></script></head>
+<script defer src="main975a3b509b793c6039d7.js"></script></head>
 
 <body>
      <!-- MAIN SECTION -->
@@ -20,7 +20,7 @@
             </div>
             <div class="weather__container">
                 <img class="icon weather__weather-icon">
-                <p class="weather__greeting">Good morning. It's currently</p>
+                <p class="weather__greeting">Good morning. It's currently <&=moreIsOpen => </p>
                 <p class="weather__temperature">15&#8451;</p>
                 <p class="weather__location">In London, Uk</p>
             </div>
@@ -35,30 +35,31 @@
     <section class="weather__more">
 
         <!-- TODAY'S HIGHLIGHTS -->
-        <h2 class="weather__heading">Today&#39;s highlights</h2>
         <div class="weather__today-highlights">
-            
-            <div class="weather__detail-item">
-                <p class="weather__detail-label">pressure</p>
-                <p class="weather__detail-data">800 mb</p>
-            </div>
-            <div class="weather__detail-item">
-                <p class="weather__detail-label">humadity</p>
-                <p class="weather__detail-data">87%</p>
-            </div>
-            <div class="weather__detail-item">
-                <p class="weather__detail-label">visibility</p>
-                <p class="weather__detail-data">4 km</p>
-            </div>
-            <div class="weather__detail-item">
-                <p class="weather__detail-label">wind</p>
-                <p class="weather__detail-data">10 km/h</p>
-            </div>
+            <h2 class="weather__heading">Today&#39;s highlights</h2>
+            <ul class="weather__detail-list">
+                <li class="weather__detail-item">
+                    <p class="weather__detail-label">pressure</p>
+                    <p class="weather__detail-data">800 mb</p>
+                </li>
+                <li class="weather__detail-item">
+                    <p class="weather__detail-label">humadity</p>
+                    <p class="weather__detail-data">87%</p>
+                </li>
+                <li class="weather__detail-item">
+                    <p class="weather__detail-label">visibility</p>
+                    <p class="weather__detail-data">4 km</p>
+                </li>
+                <li class="weather__detail-item">
+                    <p class="weather__detail-label">wind</p>
+                    <p class="weather__detail-data">10 km/h</p>
+                </li>
+            </ul>
         </div>
 
-        <!-- NEXT 7 DAYS -->
-        <h2 class="weather__heading">Next 7 days</h2>
+        <!-- NEXT DAYS -->
         <div class="weather__next-days">
+            <h2 class="weather__heading">Forecast</h2>
             <ul class="weather__next-days-list">
                 <li class="weather__day-details">
                     <p class="weather__day-date">Mon, 9 Apr</p>
@@ -116,7 +117,6 @@
                         <span class="weather__day-temp--night">10&#8451;</span>
                     </p>
                 </li>
-
             </ul>
         </div>
     </section>
