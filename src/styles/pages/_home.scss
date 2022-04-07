@@ -7,6 +7,7 @@
         position: relative;
         height: 100vh;
         width: 100%;
+        background-image: url('~/src/assets/background.jpg');
         background-position: top left;
         background-size: cover;
         transition: height .5s ease-in-out;
@@ -40,9 +41,29 @@
         height: rem(21);
         width: rem(21);
         margin-left: rem(16);
+       display: inline-block;
 
         &:hover {
             cursor: pointer;
+        }
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    &__search-arrow {
+        height: rem(21);
+        width: rem(21);
+        margin-left: rem(16);
+        display: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &.active {
+            display: inline-block;
         }
     }
 
@@ -90,6 +111,7 @@
             width: 20vw;
         }
     }
+
 
     &__container {
         position: absolute;
@@ -229,7 +251,7 @@
         flex-direction: column;
         justify-content: space-evenly;
         width: 90%;
-        height: 100%;
+        // height: 100%;
         margin: 0 auto;
         padding: 3rem 0;
         color: var(--secondary-color-dark);
@@ -303,6 +325,7 @@
         }
     }
 
+
     &__detail-label {
         font-weight: 400;
         font-size: rem(10);
@@ -319,6 +342,7 @@
     &__detail-data {
         font-weight: 700;
         font-size: rem(12);
+        text-transform: none;
 
         @include breakpoint-up(xlarge) {
             font-size: rem(18);
