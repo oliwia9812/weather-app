@@ -1,0 +1,66 @@
+@use '../util'as *;
+
+.modal {
+    @include position-absolute(20%, unset, unset, 50%);
+    z-index: 100;
+    display: none;
+    transform: translateX(-50%);
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.40) 0px 5px 10px;
+    border-radius: rem(5);
+    height: rem(320);
+    width: rem(300);
+    background-color: white;
+   
+    &__header {
+        @include flex(row, center, center);
+        position: absolute;
+        height: 30%;
+        width: 100%;
+        background-color: var(--red);
+    }
+
+    &__icon {
+        position: relative;
+        border: rem(1) solid white;
+        border-radius: rem(30);
+        height: rem(48);
+        width: rem(48);
+
+       &::after {
+           content: '\2715';
+           @include absolute-center;
+           color: white;
+       }
+    }
+
+    &__msg {
+        @include absolute-center;
+        width: 90%;
+        font-size: rem(14);
+        text-align: center;
+    }
+
+    &__button {
+        @include position-absolute(unset, unset, 10%, 50%);
+        transform: translateX(-50%);
+        transition: transform .3s ease-in-out;
+        box-shadow: rgba(0, 0, 0, 0.20) 0px 3px 5px;
+        border-radius: rem(30);
+        width: 6rem;
+        padding: rem(16);
+        background-color: var(--red);
+        text-transform: uppercase;
+        letter-spacing: rem(1);
+        color: white;
+    }
+
+    &.active {
+        display: block;
+    }
+
+    @include breakpoint-up(xlarge){
+        height: rem(400);
+        width: rem(350);
+    }
+}

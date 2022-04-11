@@ -1,55 +1,70 @@
-@use '../util' as *;
+@use '../util'as *;
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600;700;800;900&display=swap');
 
 
 html {
-  // height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
   height: -webkit-fill-available;
   font-size: 100%;
-  box-sizing: border-box;
-  overflow: auto;
 }
 
-*, *::before, *::after {
-  box-sizing: inherit;    
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body {
-  font-family: 'Jost', sans-serif;
-  height: 100%;
-  width: 100%;
+  position: relative;
   margin: 0;
   padding: 0;
+  height: 100vh;
+  height: -webkit-fill-available;
+  width: 100%;
+  font-family: 'Jost', sans-serif;
   text-transform: uppercase;
   letter-spacing: rem(1);
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  position: relative;
 }
 
 
 ul {
   margin: 0;
-  list-style-type: none;
   padding: 0;
+  list-style-type: none;
 }
 
 h1,
 h2,
 h3 {
-    margin-top: 0;
-    margin-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 p {
-    margin-top: 0;
-    margin-bottom: 0;
-    font-weight: 500;
-    font-size: rem(16);
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: rem(16);
+  font-weight: 500;
 }
 
-a, 
-a:visited, 
+a,
+a:visited,
 a:active {
-    text-decoration: none;
+  text-decoration: none;
+}
+
+
+button {
+  border: 0;
+  border-radius: rem(30);
+  background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+input {
+  border: none;
 }

@@ -4,80 +4,45 @@
 
     // Main Section
     &__main {
+        @include background-img(url('~/src/assets/background.jpg'), top left);
         position: relative;
-        height: 100vh;
-        width: 100%;
-        background-image: url('~/src/assets/background.jpg');
-        background-position: top left;
-        background-size: cover;
-        transition: height .5s ease-in-out;
         z-index: 10;
-    }
+        transition: height .5s ease-in-out;
+        height: 100vh;
+        height: -webkit-fill-available;
+        width: 100%;
 
-    &__main.active {
-        height: 40vh;
+        &.active {
+            @include breakpoint-up(large) {
+                height: 70vh;
+            }
 
-        @include breakpoint-up(large) {
-            height: 70vh;
+            height: 40vh;
         }
     }
 
     &__wrapper {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        @include absolute-center;
         height: 90%;
         width: 90%;
-
     }
 
-    &__search {
-        position: absolute;
-        right: 0;
-    }
-
-    &__search-icon {
-        height: rem(21);
-        width: rem(21);
-        margin-left: rem(16);
-       display: inline-block;
-
-        &:hover {
-            cursor: pointer;
-        }
-
-        &.hide {
-            display: none;
-        }
-    }
-
-    &__search-arrow {
-        height: rem(21);
-        width: rem(21);
-        margin-left: rem(16);
-        display: none;
-
-        &:hover {
-            cursor: pointer;
-        }
-
-        &.active {
-            display: inline-block;
-        }
+    &__search-bar {
+        @include position-absolute(unset, 0, unset, unset)
     }
 
     &__search-input {
-        background-color: transparent;
-        border: none;
-        width: 0;
-        border-radius: 0;
-        border-bottom: rem(1) solid var(--primary-color-light);
-        line-height: 1.6;
-        font-size: rem(16);
-        visibility: hidden;
         opacity: 0;
-        transition: all .5s ease-in-out;
+        visibility: hidden;
+        transition: all .4s cubic-bezier(0.19, 1, 0.22, 1);
+        border-radius: rem(50);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        padding: rem(12) rem(0) rem(12) rem(42);
+        width: 0;
+        background: rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(3.2px);
+        -webkit-backdrop-filter: blur(3.2px);
+        font-size: rem(14);
         color: var(--primary-color-light);
 
         &:focus {
@@ -86,57 +51,67 @@
         }
 
         &::placeholder {
+            font-size: inherit;
             font-family: inherit;
-            font-size: rem(16);
-            color: #87a4af;
-            padding-left: rem(4);
+            color: white;
+        }
+
+        &.active {
+            opacity: 1;
+            visibility: visible;
+            width: 60vw;
+
             @include breakpoint-up(medium) {
-                color: #4f7380;
+                width: 30vw;
+            }
+
+            @include breakpoint-up(large) {
+                width: 20vw;
             }
         }
 
-       
-    }
-
-    &__search-input.active {
-        width: 50vw;
-        visibility: visible;
-        opacity: 1;
-
-        @include breakpoint-up(medium) {
-            width: 30vw;
-        }
-
         @include breakpoint-up(large) {
-            width: 20vw;
+            padding: rem(14) rem(0) rem(14) rem(42);
         }
     }
 
+    &__search-btn {
+
+        &.active {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%) scale(0.8);
+
+            @include breakpoint-up(medium) {
+                left: rem(6);
+            }
+        }
+    }
+
+    &__search-icon {
+        height: rem(21);
+        width: rem(21);
+    }
 
     &__container {
-        position: absolute;
-        bottom: 0;
+        @include position-absolute(unset, unset, 0, unset);
+        margin-bottom: 8rem;
         color: var(--primary-color-light);
-        margin-bottom: 3rem;
-
-        @include breakpoint-up(large) {
-            margin-bottom: 10vh;
-        }
     }
 
     &__weather-icon {
+        opacity: 1;
+        margin-bottom: rem(24);
         height: rem(70);
         width: rem(70);
-        margin-bottom: rem(24);
-        opacity: 1;
-
-        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
         transition: opacity .3s ease-in-out;
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
 
         @include breakpoint-down(medium) {
+
             &.is-hidden {
                 opacity: 0;
-
             }
         }
 
@@ -146,9 +121,9 @@
         }
 
         @include breakpoint-up(large) {
+            margin-bottom: rem(36);
             height: rem(120);
             width: rem(120);
-            margin-bottom: rem(36);
         }
     }
 
@@ -167,50 +142,39 @@
     }
 
     &__button {
-        box-shadow: rgba(0, 0, 0, 0.40) 0px 5px 10px;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        background-color: var(--primary-color-light);
-        border: 0;
-        border-radius: rem(30);
-        transition: all .2s cubic-bezier(0.19, 1, 0.22, 1);
-        width: 6.2rem;
+        @include position-absolute(unset, 0, 0, unset);
+        @include flex(row, space-between, center);
         padding: rem(6) rem(6) rem(6) rem(16);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.40) 0px 5px 10px;
+        width: 6.2rem;
         transition: transform .3s ease-in-out;
+        background-color: var(--primary-color-light);
 
-        @include breakpoint-up(medium) {}
+        &:hover {
+            transform: translateY(rem(-5));
+        }
 
         @include breakpoint-up(large) {
             padding: .5rem .5rem .5rem 1rem;
             width: 6.5rem;
         }
 
-
         &-text {
             display: block;
             text-transform: uppercase;
-            font-weight: 500;
             font-family: 'Jost', sans-serif;
+            font-weight: 500;
             letter-spacing: rem(2);
             color: var(--secondary-color-dark);
         }
 
-        &:hover {
-            cursor: pointer;
-            transform: translateY(rem(-5));
-        }
-
         &-circle {
             position: relative;
+            z-index: 100;
+            border-radius: rem(30);
             height: 1.6rem;
             width: 1.6rem;
             background-color: var(--secondary-color-dark);
-            border-radius: 30px;
-            z-index: 100;
 
             &::after {
                 content: '';
@@ -218,14 +182,15 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%) rotate(45deg);
-                border: solid var(--primary-color-light);
-                border-width: 0 rem(2) rem(2) 0;
                 display: inline-block;
                 padding: rem(2.5);
+                border: solid var(--primary-color-light);
+                border-width: 0 rem(2) rem(2) 0;
             }
         }
 
         &-circle.active {
+
             &::after {
                 transform: translate(-45%, -45%) rotate(-135deg);
             }
@@ -234,12 +199,8 @@
 
     &::after {
         content: '';
+        @include position-absolute(0, 0, 0, 0);
         z-index: -10;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
         padding: 0;
         height: 100%;
         width: 100%;
@@ -248,24 +209,31 @@
 
     // More Section
     &__more {
-        flex-direction: column;
-        justify-content: space-evenly;
-        width: 90%;
-        // height: 100%;
+        display: none;
         margin: 0 auto;
         padding: 3rem 0;
+        width: 90%;
         color: var(--secondary-color-dark);
-        display: none;
-
-        @include breakpoint-up(large) {
-            flex-direction: row;
-            justify-content: space-between;
-            font-size: rem(16);
-            padding: 3rem 0;
-        }
 
         &.active {
             display: flex;
+        }
+
+        @include breakpoint-up(large) {
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            height: 30vh;
+            font-size: rem(16);
+        }
+    }
+
+    &__more-wrapper {
+        @include flex(column, space-evenly, unset);
+        width: 100%;
+
+        @include breakpoint-up(large) {
+            @include flex(row, space-between, flex-start);
         }
 
         @include breakpoint-up(xlarge) {
@@ -280,44 +248,40 @@
         @include breakpoint-up(large) {
             margin-bottom: rem(36);
         }
-
     }
 
     &__today-highlights {
 
         @include breakpoint-up(large) {
-            width: 30%;
             margin-right: 5%;
+            width: 30%;
         }
 
         @include breakpoint-up(xlarge) {
             margin-right: 10%;
         }
-
     }
 
     &__detail-list {
-        display: flex;
-        justify-content: space-between;
+        @include flex(row, space-between, unset);
         margin-bottom: rem(36);
 
         @include breakpoint-up(medium) {
-            flex-wrap: nowrap;
             justify-content: space-between;
-            text-align: center;
+            flex-wrap: nowrap;
             margin-bottom: rem(36);
+            text-align: center;
         }
 
         @include breakpoint-up(large) {
-            flex-wrap: wrap;
             justify-content: space-between;
+            flex-wrap: wrap;
             text-align: left;
         }
     }
 
     &__detail-item {
-        padding-right: rem(16);
-        padding-bottom: rem(16);
+        padding: unset rem(16) rem(16) unset;
 
         @include breakpoint-up(large) {
             padding-bottom: rem(36);
@@ -325,11 +289,10 @@
         }
     }
 
-
     &__detail-label {
-        font-weight: 400;
         font-size: rem(10);
-
+        font-weight: 400;
+    
         &>*:not(:last-child) {
             margin-bottom: rem(16);
         }
@@ -340,8 +303,8 @@
     }
 
     &__detail-data {
-        font-weight: 700;
         font-size: rem(12);
+        font-weight: 700;
         text-transform: none;
 
         @include breakpoint-up(xlarge) {
@@ -363,23 +326,21 @@
 
     &__day-details {
         position: relative;
-        box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+        @include flex(row, space-between, center);
+        padding: rem(24) rem(20);
         border-radius: rem(12);
-        padding: rem(16) rem(20);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    
         &:not(:last-of-type) {
             margin-bottom: rem(16);
         }
 
         @include breakpoint-up(large) {
             flex-direction: column;
-            padding: rem(12) rem(16);
             flex: 1;
             margin-bottom: rem(16);
-
+            padding: rem(12) rem(16);
+           
             &:not(:last-of-type) {
                 margin-right: rem(16);
             }
@@ -389,7 +350,7 @@
             }
         }
 
-        @include breakpoint-up(large) {
+        @include breakpoint-up(xlarge) {
             padding: rem(16) rem(18);
 
             &>*:not(:last-child) {
@@ -406,7 +367,7 @@
         }
 
         @include breakpoint-up(xlarge) {
-            font-size: rem(14);
+            font-size: rem(12);
         }
     }
 
@@ -418,7 +379,7 @@
         }
 
         @include breakpoint-up(xlarge) {
-            font-size: rem(14);
+            font-size: rem(12);
         }
 
         &--night {
@@ -431,9 +392,26 @@
         width: rem(16);
         filter: invert(14%) sepia(23%) saturate(3%) hue-rotate(314deg) brightness(100%) contrast(85%);
 
+        @include breakpoint-down(medium) {
+            @include position-absolute(unset, unset, unset, 50%);
+            transform: translateX(-50%);
+        }
+
         @include breakpoint-up(large) {
             height: rem(36);
             width: rem(36);
         }
+    }
+}
+
+// Overlay
+.overlay {
+    @include position-absolute(0,0,0,0);
+    z-index: 10;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.4);
+
+    &.active {
+        display: block;
     }
 }

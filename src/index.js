@@ -14,59 +14,72 @@ import {
     DateTime
 } from "luxon";
 
-//Search city
-const searchInput = document.querySelector('.weather__search-input');
+
+
+//Search functionality
 const searchIcon = document.querySelector('.weather__search-icon');
-const searchArrowIcon = document.querySelector('.weather__search-arrow');
-let inputValue;
-
 searchIcon.setAttribute('src', Search);
-searchArrowIcon.setAttribute('src', ArrowRight)
 
-searchInput.addEventListener('keyup', (e) => {
-    inputValue = e.target.value;
-});
+const searchInput = document.querySelector('.weather__search-input');
+const searchButton = document.querySelector('.weather__search-btn');
+let inputValue = '';
 
-window.addEventListener('click', (e) => {
-    if(e.target === searchIcon) {
-        displayInput();
-        displayArrow();
-    } else if (e.target === searchArrowIcon) {
-        if(inputValue){
-            if(inputValue.length < 3){
-                displayError('Please provide correct location');
-            } else {
-                getWeatherDataByCityName(inputValue)
-                    .catch(err => displayError('Incorrect city name'));
-            }
-        } else {
-            displayError('Please provide location');
+['click', 'touchstart'].forEach(evt => {
+    window.addEventListener(evt, (e) => {
+        if (e.target === searchIcon) {
+            displayInput();
+        } else if (e.target !== searchInput) {
+            hideInput();
         }
-        clearInputValue();
-    } else if (e.target !== searchInput) {
-        hideInput();
-        displaySearch();
-        clearInputValue();
+    })
+})
+
+const displayInput = () => {
+    searchButton.classList.add('active');
+    searchInput.classList.add('active');
+}
+
+const hideInput = () => {
+    searchButton.classList.remove('active');
+    searchInput.classList.remove('active');
+
+    clearValueFromInput();
+}
+
+const clearValueFromInput = () => {
+    inputValue = '';
+    searchInput.value = '';
+}
+
+
+window.addEventListener('keyup', (e) => {
+    inputValue = e.target.value;
+})
+
+window.addEventListener('keyup', (e) => {
+    if (e.key == 'Enter') {
+        validateCityName();
     }
 })
 
-const displaySearch = () => {
-    searchArrowIcon.classList.remove('active');
-    searchIcon.classList.remove('hide'); 
+const validateCityName = () => {
+    if (inputValue) {
+        if (inputValue.length <= 3) {
+            displayError('City name is too short. Please enter correct city name.')
+        } else {
+            searchCity(inputValue)
+        }
+    } else {
+       displayError('Please enter city name');
+    }
 }
-const displayArrow = () => {
-    searchArrowIcon.classList.add('active');
-    searchIcon.classList.add('hide');
-}
-const displayInput = () => {
-    searchInput.classList.add('active');
-}
-const hideInput = () => {
-    searchInput.classList.remove('active');
-}
-const clearInputValue = () => {
-    inputValue = '';
-    searchInput.value = ''
+
+const searchCity = (value) => {
+    getWeatherDataByCityName(inputValue)
+        .then(hideInput())
+        .catch(error => {
+            displayError('City not found. Please provide correct city name.')
+        })
 }
 
 
@@ -113,22 +126,22 @@ const getDateForNextDays = () => {
     const cards = document.querySelectorAll('.weather__day-date');
     let today = new DateTime.now();
     let days = [];
-    
+
     function formatDays(day) {
         day = day.toFormat('EEE, d MMM');
         return day
     }
-    
+
     for (var i = 1; i <= 7; i++) {
         days.push(formatDays(today.plus({
             days: i
         })));
     }
-    
+
     for (var i = 0; i <= 6; i++) {
         cards[i].innerHTML = days[i]
     }
-    
+
 }
 getDateForNextDays();
 
@@ -149,7 +162,6 @@ function displayGreeting() {
 displayGreeting();
 
 
-
 //Weather API
 const checkInitialPosition = () => {
     let checkGeolocationPermission = new Promise((resolve, reject) => {
@@ -158,7 +170,7 @@ const checkInitialPosition = () => {
                 resolve(position.coords)
             },
             error => {
-                reject(`ERROR ${error.code}: ${error.message}`)
+                reject()
             }
         )
     }).catch(error => error)
@@ -166,22 +178,22 @@ const checkInitialPosition = () => {
     return checkGeolocationPermission
 }
 
-const getInitialData = async() => {
+const getInitialData = async () => {
     let response = await checkInitialPosition();
     let data = await response;
     return data
 }
 
- const getCurrentWeatherData = async(lat,lon) => {
+const getCurrentWeatherData = async (lat, lon) => {
     const api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.API_KEY}&units=metric`;
     const response = await fetch(api);
     const data = await response.json();
 
-   displayCurrentData(data);
-   getForecastWeatherData(data.coord.lat, data.coord.lon);
+    displayCurrentData(data);
+    getForecastWeatherData(data.coord.lat, data.coord.lon);
 }
 
-const getForecastWeatherData = async(lat, lon) => {
+const getForecastWeatherData = async (lat, lon) => {
     const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&units=metric&appid=${process.env.API_KEY}`;
     const response = await fetch(api);
     let data = await response.json();
@@ -189,19 +201,28 @@ const getForecastWeatherData = async(lat, lon) => {
     displayForecastData(data);
 }
 
-const getWeatherDataByCityName = async(cityName) => {
+const getWeatherDataByCityName = async (cityName) => {
     const api = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.API_KEY}&units=metric`;
     const response = await fetch(api);
     let data = await response.json();
-    
+
+    console.log(response);
+
     getForecastWeatherData(data.coord.lat, data.coord.lon);
     displayCurrentData(data);
 }
 
 window.addEventListener('load', () => {
-   getInitialData()
-        .then(response => { getCurrentWeatherData(response.latitude, response.longitude)})
-        .catch(getCurrentWeatherData(52.237049, 21.017532));
+    getInitialData()
+        .then(response => {
+            getCurrentWeatherData(response.latitude, response.longitude)
+                .catch(error => {
+                    displayError('Network error. Please check weather later.')
+                })
+        })
+        .catch(getCurrentWeatherData(52.237049, 21.017532).catch(error => {
+            displayError('Network error. Please check weather later.')
+        }));
 })
 
 const displayCurrentData = (data) => {
@@ -222,9 +243,9 @@ const displayCurrentData = (data) => {
     location.innerHTML = 'in' + ' ' + data.name + ', ' + data.sys.country;
     currentTemp.innerHTML = Math.round(data.main.temp) + '&#8451;';
     humidity.innerHTML = data.main.humidity + '%';
-    visibility.innerHTML = ((data.visibility)*0.001) + 'KM';
-    pressure.innerHTML = data.main.pressure + ' ' +'hPa';
-    wind.innerHTML = Math.round(data.wind.speed*10)/10 + ' ' + 'm/s';
+    visibility.innerHTML = ((data.visibility) * 0.001) + 'KM';
+    pressure.innerHTML = data.main.pressure + ' ' + 'hPa';
+    wind.innerHTML = Math.round(data.wind.speed * 10) / 10 + ' ' + 'm/s';
 }
 
 function displayForecastData(data) {
@@ -236,17 +257,35 @@ function displayForecastData(data) {
     let dayTempValue;
     let nightTempValue;
 
-    for(var i = 1; i<=7; i++) {
-       iconName = data.daily[i].weather[0].main;
-       dayTempValue = (Math.round(data.daily[i].temp.max));
-       nightTempValue = (Math.round(data.daily[i].temp.min)).toFixed().replace('-0', '0');
+    for (var i = 1; i <= 7; i++) {
+        iconName = data.daily[i].weather[0].main;
+        dayTempValue = (Math.round(data.daily[i].temp.max));
+        nightTempValue = (Math.round(data.daily[i].temp.min)).toFixed().replace('-0', '0');
 
-       icons[i-1].setAttribute('src', `${iconName}.svg`)
-       dayTemp[i-1].innerHTML = dayTempValue + '&#8451;';
-       nightTemp[i-1].innerHTML = nightTempValue + '&#8451;';
+        icons[i - 1].setAttribute('src', `${iconName}.svg`)
+        dayTemp[i - 1].innerHTML = dayTempValue + '&#8451;';
+        nightTemp[i - 1].innerHTML = nightTempValue + '&#8451;';
     }
 }
 
+
+
+//Display error 
+const modal = document.querySelector('.modal');
+const modalButton = document.querySelector('.modal__button');
+const overlay = document.querySelector('.overlay');
+
 const displayError = msg => {
-    alert(msg);
+    const modalText = document.querySelector('.modal__msg');
+
+    overlay.classList.add('active');
+    modal.classList.add('active');
+    modalText.innerHTML = msg;
 }
+
+modalButton.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
+});

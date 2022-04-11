@@ -10,13 +10,15 @@
 </head>
 
 <body>
-     <!-- MAIN SECTION -->
+    <!-- MAIN SECTION -->
     <section class="weather__main">
         <div class="weather__wrapper">
-            <div class="weather__search">
-                <input placeholder="Search location" type="text" class="weather__search-input" name="location" id="location">
-                <img class="icon weather__search-icon">
-                <img class="icon weather__search-arrow">
+            <div class="weather__search-bar">
+                <input placeholder="Enter city name" type="text" class="weather__search-input" name="location"
+                    id="location">
+                <button class="weather__search-btn" type="submit">
+                    <img class="weather__search-icon">
+                </button>
             </div>
 
             <div class="weather__container">
@@ -32,97 +34,109 @@
         </div>
     </section>
 
-     <!-- MORE SECTION -->
+    <!-- MORE SECTION -->
     <section class="weather__more">
+        <div class="weather__more-wrapper">
+            <!-- TODAY'S HIGHLIGHTS -->
+            <div class="weather__today-highlights">
+                <h2 class="weather__heading">Today&#39;s highlights</h2>
+                <ul class="weather__detail-list">
+                    <li class="weather__detail-item">
+                        <p class="weather__detail-label">pressure</p>
+                        <p class="weather__detail-data" id="pressure"></p>
+                    </li>
+                    <li class="weather__detail-item">
+                        <p class="weather__detail-label">humidity</p>
+                        <p class="weather__detail-data" id="humidity"></p>
+                    </li>
+                    <li class="weather__detail-item">
+                        <p class="weather__detail-label">visibility</p>
+                        <p class="weather__detail-data" id="visibility"></p>
+                    </li>
+                    <li class="weather__detail-item">
+                        <p class="weather__detail-label">
 
-        <!-- TODAY'S HIGHLIGHTS -->
-        <div class="weather__today-highlights">
-            <h2 class="weather__heading">Today&#39;s highlights</h2>
-            <ul class="weather__detail-list">
-                <li class="weather__detail-item">
-                    <p class="weather__detail-label">pressure</p>
-                    <p class="weather__detail-data" id="pressure"></p>
-                </li>
-                <li class="weather__detail-item">
-                    <p class="weather__detail-label">humidity</p>
-                    <p class="weather__detail-data" id="humidity"></p>
-                </li>
-                <li class="weather__detail-item">
-                    <p class="weather__detail-label">visibility</p>
-                    <p class="weather__detail-data" id="visibility"></p>
-                </li>
-                <li class="weather__detail-item">
-                    <p class="weather__detail-label">
-                       
-                        wind
-                    </p>
-                    <p class="weather__detail-data" id="wind">10 km/h</p>
-                </li>
-            </ul>
-        </div>
+                            wind
+                        </p>
+                        <p class="weather__detail-data" id="wind"></p>
+                    </li>
+                </ul>
+            </div>
 
-        <!-- NEXT DAYS -->
-        <div class="weather__next-days">
-            <h2 class="weather__heading">Forecast for next 7 days</h2>
-            <ul class="weather__next-days-list">
-                <li class="weather__day-details">
-                    <p class="weather__day-date"></p>
-                    <img class="weather__day-icon" loading="lazy">
-                    <p class="weather__day-temp">
-                        <span class="weather__day-temp--day"></span>
-                        <span class="weather__day-temp--night"></span>
-                    </p>
-                </li>
-                <li class="weather__day-details">
-                    <p class="weather__day-date"></p>
-                    <img class="weather__day-icon" loading="lazy">
-                    <p class="weather__day-temp">
-                        <span class="weather__day-temp--day"></span>
-                        <span class="weather__day-temp--night"></span>
-                    </p>
-                </li>
-                <li class="weather__day-details">
-                    <p class="weather__day-date"></p>
-                    <img class="weather__day-icon" loading="lazy">
-                    <p class="weather__day-temp">
-                        <span class="weather__day-temp--day"></span>
-                        <span class="weather__day-temp--night"></span>
-                    </p>
-                </li>
-                <li class="weather__day-details">
-                    <p class="weather__day-date"></p>
-                    <img class="weather__day-icon" loading="lazy">
-                    <p class="weather__day-temp">
-                        <span class="weather__day-temp--day"></span>
-                        <span class="weather__day-temp--night"></span>
-                    </p>
-                </li>
-                <li class="weather__day-details">
-                    <p class="weather__day-date"></p>
-                    <img class="weather__day-icon" loading="lazy">
-                    <p class="weather__day-temp">
-                        <span class="weather__day-temp--day"></span>
-                        <span class="weather__day-temp--night"></span>
-                    </p>
-                </li>
-                <li class="weather__day-details">
-                    <p class="weather__day-date"></p>
-                    <img class="weather__day-icon" loading="lazy">
-                    <p class="weather__day-temp">
-                        <span class="weather__day-temp--day">;</span>
-                        <span class="weather__day-temp--night"></span>
-                    </p>
-                </li>
-                <li class="weather__day-details">
-                    <p class="weather__day-date"></p>
-                    <img class="weather__day-icon" loading="lazy">
-                    <p class="weather__day-temp">
-                        <span class="weather__day-temp--day"></span>
-                        <span class="weather__day-temp--night"></span>
-                    </p>
-                </li>
-            </ul>
+            <!-- NEXT DAYS -->
+            <div class="weather__next-days">
+                <h2 class="weather__heading">Forecast for next 7 days</h2>
+                <ul class="weather__next-days-list">
+                    <li class="weather__day-details">
+                        <p class="weather__day-date"></p>
+                        <img class="weather__day-icon" loading="lazy">
+                        <p class="weather__day-temp">
+                            <span class="weather__day-temp--day"></span>
+                            <span class="weather__day-temp--night"></span>
+                        </p>
+                    </li>
+                    <li class="weather__day-details">
+                        <p class="weather__day-date"></p>
+                        <img class="weather__day-icon" loading="lazy">
+                        <p class="weather__day-temp">
+                            <span class="weather__day-temp--day"></span>
+                            <span class="weather__day-temp--night"></span>
+                        </p>
+                    </li>
+                    <li class="weather__day-details">
+                        <p class="weather__day-date"></p>
+                        <img class="weather__day-icon" loading="lazy">
+                        <p class="weather__day-temp">
+                            <span class="weather__day-temp--day"></span>
+                            <span class="weather__day-temp--night"></span>
+                        </p>
+                    </li>
+                    <li class="weather__day-details">
+                        <p class="weather__day-date"></p>
+                        <img class="weather__day-icon" loading="lazy">
+                        <p class="weather__day-temp">
+                            <span class="weather__day-temp--day"></span>
+                            <span class="weather__day-temp--night"></span>
+                        </p>
+                    </li>
+                    <li class="weather__day-details">
+                        <p class="weather__day-date"></p>
+                        <img class="weather__day-icon" loading="lazy">
+                        <p class="weather__day-temp">
+                            <span class="weather__day-temp--day"></span>
+                            <span class="weather__day-temp--night"></span>
+                        </p>
+                    </li>
+                    <li class="weather__day-details">
+                        <p class="weather__day-date"></p>
+                        <img class="weather__day-icon" loading="lazy">
+                        <p class="weather__day-temp">
+                            <span class="weather__day-temp--day"></span>
+                            <span class="weather__day-temp--night"></span>
+                        </p>
+                    </li>
+                    <li class="weather__day-details">
+                        <p class="weather__day-date"></p>
+                        <img class="weather__day-icon" loading="lazy">
+                        <p class="weather__day-temp">
+                            <span class="weather__day-temp--day"></span>
+                            <span class="weather__day-temp--night"></span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
         </div>
     </section>
+
+    <!-- MODAL -->
+    <div class="modal">
+        <div class="modal__header">
+            <div class="modal__icon"></div>
+        </div>
+        <p class="modal__msg"></p>
+        <button class="modal__button" type="button">close</button>
+    </div>
+    <div class="overlay"></div>
 </body>
+
 </html>
