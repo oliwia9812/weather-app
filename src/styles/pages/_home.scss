@@ -13,10 +13,14 @@
         width: 100%;
 
         &.active {
+            height: 50vh;
+
             @include breakpoint-up(large) {
+                height: 65vh;
+            }
+            @include breakpoint-up(xlarge) {
                 height: 70vh;
             }
-            height: 50vh;
         }
     }
 
@@ -226,8 +230,11 @@
             justify-content: center;
             align-items: center;
             padding: 0;
-            height: 30vh;
+            height: 35vh;
             font-size: rem(16);
+        }
+        @include breakpoint-up(large) {
+            height: 30vh;
         }
     }
 
@@ -237,10 +244,12 @@
 
         @include breakpoint-up(large) {
             @include flex(row, space-between, flex-start);
+            height: 25vh;
         }
 
         @include breakpoint-up(xlarge) {
             justify-content: unset;
+            height: auto;
         }
     }
 
