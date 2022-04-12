@@ -11,9 +11,6 @@ module.exports = {
   mode: 'development',
 
   entry: ["regenerator-runtime/runtime.js", path.resolve(__dirname, 'src/index.js')],
-  // entry: {
-  //   bundle: path.resolve(__dirname, 'src/index.js'),
-  // },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name][contenthash].js',
@@ -53,7 +50,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Webpack App',
+      title: 'Weather App',
       filename: 'index.html',
       template: 'src/template.html',
     }),

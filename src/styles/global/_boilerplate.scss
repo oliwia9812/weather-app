@@ -68,3 +68,11 @@ button {
 input {
   border: none;
 }
+
+img {
+  display: none;
+}
+
+img[src] {
+ display: block;
+}

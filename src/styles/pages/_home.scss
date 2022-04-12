@@ -16,8 +16,7 @@
             @include breakpoint-up(large) {
                 height: 70vh;
             }
-
-            height: 40vh;
+            height: 50vh;
         }
     }
 
@@ -96,8 +95,12 @@
 
     &__container {
         @include position-absolute(unset, unset, 0, unset);
-        margin-bottom: 8rem;
+        margin-bottom: 4rem;
         color: var(--primary-color-light);
+
+        @include breakpoint-up(large) {
+            margin-bottom: 6rem;
+        }
     }
 
     &__weather-icon {
@@ -105,7 +108,7 @@
         margin-bottom: rem(24);
         height: rem(70);
         width: rem(70);
-        transition: opacity .3s ease-in-out;
+        transition: opacity .4s cubic-bezier(0.19, 1, 0.22, 1);
         filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
 
         @include breakpoint-down(medium) {
@@ -415,3 +418,6 @@
         display: block;
     }
 }
+
+
+  
